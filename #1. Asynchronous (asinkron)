@@ -1,0 +1,105 @@
+A. Umum :
+1. Asynchronous (asinkron) : Konsep di mana tugas- tugas dalam sebuah program tidak harus diekseusi secara beruntun atau menunggu tugas sebelum selesai.
+------------------------------------------------------
+2. Dalam pemrograman, asinkron memungkinkan suatu tugas berjalan di latar belakang, sementara tugas lain terus dieksekusi. 
+------------------------------------------------------
+3. Ini sangat berguna dalam situasi di mana ada tugas yang memerlukan waktu lama untuk diselesaikan, seperti mengmabil data dari server, membaca file atau menunggu respons dari pengguna.
+------------------------------------------------------
+
+
+
+B. Mengapa Asynchronous penting :
+1. Dalam pemrograman sinkron, setiap baris kode harus menunggu baris sebelumnya selesai sebelum dieksekusi.
+------------------------------------------------------
+2. Ini bisa menyebabkan program "membeku" atau tidak responsif jika ada tugas yang memakan waktu lama. 
+------------------------------------------------------
+3. Dengan pendekatan asinkron, tugas-tugas yang memakan waktu bisa dilakukan di latar belakang, sementara bagain lain dari program tetap berjalan.
+------------------------------------------------------
+
+
+
+C. Contoh sederhana AsynChronous :
+1. Misalnya, dalam JavaScript, kita bisa menggunakan `setTimeout`, `promise`, atau 'async/await' untuk melakukan operasi asinkron.
+* <---
+console.log('Mulai');
+
+setTimeout(() => {
+  console.log('ini dieksekusi setelah 2 detik);
+}. 2000);
+
+console.log('Selesai');
+
+//Mulai
+//Selesai
+//Ini dieksekusi setelah 2 detik
+--->
+------------------------------------------------------
+Penjelasan:
+* Kode ini tidak dieksekusi secara beruntun. Meskipun fungsi `setTimeout` memiliki waktu tunggu 2 detik, "Selesai" akan dicetak terlebih dahulu sebelum "Ini dieksekusi setelah 2 detik".
+------------------------------------------------------
+* Fungsi di dalam `setTimeout` berjalan secara asinkron di latar belakang dan hanya dipanggil setelah waktu 2 detik berlalu, sementara program terus berjalan.
+------------------------------------------------------
+------------------------------------------------------
+2. Menggunakan `promise` :
+<---
+const fetchData = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Data berhasil diambil');
+  }, 2000);
+});
+
+fetchData.then((message) => {
+  console.log(message);
+});
+
+//output
+//(Data dicetak setelah 2 detik)
+//Data berhasil diambil
+--->
+------------------------------------------------------
+//penjelasan 
+* `promise` adalah objek yang mewakili keberhasilan atau kegagalan dari operasi asinkron di masa mendatang.
+------------------------------------------------------
+* Dalam contoh ini, setelah 2 detik, `promise` akan diselesaikan (resolved) dan megnembalikan pesan "Data berhasil diambil", 'then' akan menangani hasil tersebut.
+------------------------------------------------------
+------------------------------------------------------
+3. Menggunakan `async/await` :
+<---
+async function getData() {
+  console.log('Mengambil data...');
+  let data = await fetchData();
+  console.log(data);
+}
+
+getData();
+--->
+------------------------------------------------------
+//Penjelasan:
+* async/await adalah cara modern dan lebih mudah dibaca untuk menangani operasi asinkron yang dibangun di atas Promise.
+------------------------------------------------------
+* Fungsi getData menunggu (await) hingga fetchData selesai dan baru setelah itu melanjutkan eksekusi.
+------------------------------------------------------
+
+
+
+D. Contoh kasus penggunaan Asynchronous :
+1. Mengambil data dari API : Ketika aplikasi web meminta data dari server, kita tidak ingin menunggu respons server sebelum memungkinkan pengguna untuk terus menggunakan aplikasi.
+------------------------------------------------------
+2. Pemrosesan File: Dalam aplikasi desktop, seperti pengeditan video, pengguna harus tetap bisa menggunakan aplikasi saat pemrosesan video berjalan di latar belakang.
+------------------------------------------------------
+3. Penanganan Input Pengguna: Ketika menunggu input dari pengguna, program tidak boleh berhenti bekerja, melainkan tetap harus interaktif.
+------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
