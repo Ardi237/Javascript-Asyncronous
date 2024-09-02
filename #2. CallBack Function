@@ -1,0 +1,53 @@
+A. Umum :
+1. Callback function adalah fungsi yang dikirimkan sebagai argumen ke fungsi lain dan dieksekusi setelah fungsi lain selesai menjalankan tugasnya.
+------------------------------------------------------
+2. Callback sering digunakan dalam bahasa pemrograman JavaScript, terutama dalam penanganan asynchronous, seperti ketika menunggu respons dari server atau ketika menggunakan timer.                                
+------------------------------------------------------
+
+
+
+B. Contoh sederhana callback function :
+1. Contohnya :
+<---
+function greet (name, callback) {
+  console.log(`Hello, ` + name);
+  callback();
+}
+
+function sayGoodbye() {
+  console.log ('Goodbye !');
+}
+
+greet('Ardi', sayGoodbye);
+--->
+------------------------------------------------------
+//penjelasan :
+1. `greet` adalah fungsi yang menerima dua argumen: `name` dan   `callback`.
+2. Di dalam fungsi `greet`, kita mencetak pesan "Hello, Ardi".
+------------------------------------------------------
+3. Setelah mencetak pesan, kita memanggil fungsi `callback` yang dikirim sebagai argumen, dalam hal ini adalah fungsi `sayGoodbye`.
+------------------------------------------------------
+//Penjelasan
+* greet adalah fungsi yang menerima dua argumen: `name` dan `callback`.
+* Di dalam fungsi `greet`, kita mencetak pesan "Hello, Ardi".
+* Setelah mencetak pesan, kita memanggil fungsi `callback` yang dikirim sebagai argumen, dalam hal ini adalah fungsi `sayGoodbye`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
