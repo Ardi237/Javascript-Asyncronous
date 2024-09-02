@@ -1,0 +1,92 @@
+A. Umum :
+1. Call stack (tumpukan pemanggilan) adalah struktur data yang digunakan oleh mesin JavaScript (dan sebagian besar bahasa pemrograman lainnya) untuk melacak urutan eksekusi fungsi dalam program.
+-----------------------------------------------------
+2. Call stack bekerja dengan prinsip LIFO (Last In, First Out), yang berarti bahwa fungsi terakhir yang dipanggil adalah yang pertama diselesaikan.
+-----------------------------------------------------
+
+
+
+B. Bagaimana Call stack bekerja :
+1. Ketika sebuah fungsi dipanggil dalam JavaScript, fungsi tersebut dimasukkan ke dalam call stack. 
+2. Setelah fungsi selesai dieksekusi, fungsi tersebut dikeluarkan dari stack.
+3. Contoh sederhana Call Stack :
+<---
+function firstFunction() {
+  console.log('Ini dari firstFunction');
+  secondFunction();
+}
+
+function secondFunction() {
+  console.log('Ini dari secondFunction');
+  thirdFunction();
+}
+
+function thirdFunction() {
+  console.log('Ini dari thirdFunction');
+}
+
+firstFunction();
+--->
+//Penjelasan :
+1. Ketika `firstFunction()` dipanggi, fungsi ini masuk ke dalam call stack.
+-----------------------------------------------------
+2. 'firstFunction' memanggil `secondFuncton()`, jadi `secondFunction` ditambahkan juga masuk ke call stack.
+-----------------------------------------------------
+3. secondFunction kemudian memanggil thirdFunction(), dan thirdFunction juga masuk ke call stack.
+-----------------------------------------------------
+4. Ketika thirdFunction selesai dieksekusi, ia dikeluarkan dari call stack. Kemudian secondFunction selesai dan dikeluarkan, dan akhirnya firstFunction selesai dan dikeluarkan dari stack.
+-----------------------------------------------------
+-----------------------------------------------------
+1. Ilustrasi Call Stack :
+- Saat `firstFunction()` dipanggil : | firstFunction |
+-----------------------------------------------------
+- Saat `secondFunction()` dipanggil dari firstFunction : 
+| secondFunction |
+| firstFunction  |
+-----------------------------------------------------
+- Saat thirdFunction() dipanggil dari secondFunction:
+| thirdFunction |
+| secondFunction |
+| firstFunction  |
+-----------------------------------------------------
+Setelah thirdFunction selesai:
+| secondFunction |
+| firstFunction  |
+-----------------------------------------------------
+Setelah secondFunction selesai:
+| firstFunction  |
+Setelah firstFunction selesai:
+(stack kosong)
+-----------------------------------------------------
+
+
+
+C. Error yang Berkaitan dengan Call Stack :
+1. adalah satu jenis error yang dapat terjadi dalam call stack adalah "stack overflow". 
+---------------------------------------------------
+2. Stack overflow terjadi ketika ada terlalu banyak fungsi yang ditambahkan ke dalam call stack tanpa ada yang dikeluarkan. Ini sering terjadi dalam kasus rekursi tanpa batas.
+---------------------------------------------------
+3. Contoh stack overflow :
+function infiniteRecursion() {
+  infiniteRecursion(); // Fungsi ini terus memanggil dirinya sendiri
+}
+
+infiniteRecursion(); // Ini akan menyebabkan stack overflow
+
+
+
+D. Mengapa Call Stack Penting?
+1. Call stack penting karena:
+1a. Menjaga Urutan Eksekusi: Call stack memastikan bahwa fungsi dieksekusi dalam urutan yang benar, mengikuti urutan pemanggilan.
+---------------------------------------------------
+1b. Menangani Error: Ketika terjadi error dalam program, seperti stack overflow, JavaScript dapat memberikan informasi tentang posisi error dalam call stack, yang membantu debugging.
+---------------------------------------------------
+1c. Memahami Proses Eksekusi: Memahami call stack membantu dalam memahami bagaimana fungsi dipanggil, bagaimana tumpukan pemanggilan bekerja, dan bagaimana asynchronous (seperti event loop dan callback) berinteraksi dengan stack.
+---------------------------------------------------
+
+
+
+
+
+
+
