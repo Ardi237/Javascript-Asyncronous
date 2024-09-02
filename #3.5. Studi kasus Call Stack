@@ -1,0 +1,118 @@
+A. Umum :
+1. Kita akan membuat studi kasus penerapan Call Stack pada penggunaan rumus pyhtagoras.
+---------------------------------------------------
+
+
+
+B. Kode :
+1. Contoh :
+const perkalian = (x, y) => x * y;
+const akar = x => perkalian(x, x);
+const pythagoras = (a, b, c) => (akar(a) + akar(b) === akar(c));
+
+// Contoh penggunaan
+pythagoras(3, 4, 5);
+---------------------------------------------------
+//penjelasan :
+* Fungsi perkalian(x, y):
+- Fungsi ini mengalikan dua nilai x dan y.
+Misalnya, jika x = 3 dan y = 3, maka hasilnya adalah 9.
+---------------------------------------------------
+* Fungsi akar(x):
+- Fungsi ini menghitung kuadrat dari x, yaitu x * x, dengan memanggil fungsi perkalian.
+Misalnya, jika x = 3, maka akar(3) akan memanggil perkalian(3, 3) dan hasilnya adalah 9.
+---------------------------------------------------
+* Fungsi pythagoras(a, b, c):
+- Fungsi ini mengecek apakah kuadrat dari a ditambah kuadrat dari b sama dengan kuadrat dari c.
+Misalnya, jika a = 3, b = 4, dan c = 5, fungsi ini akan memanggil akar(a), akar(b), dan akar(c) dan kemudian memeriksa apakah 9 + 16 === 25.
+---------------------------------------------------
+---------------------------------------------------
+
+
+
+
+C. Proses Call Stack : 
+1. Misalkan kita memanggil fungsi pythagoras(3, 4, 5):
+---------------------------------------------------
+Langkah pertama: Memanggil pythagoras(3, 4, 5).
+Fungsi pythagoras masuk ke dalam call stack.
+---------------------------------------------------
+Langkah kedua: Di dalam pythagoras, fungsi akar(a) dipanggil dengan a = 3.
+Fungsi akar(3) masuk ke dalam call stack.
+---------------------------------------------------
+Langkah ketiga: Di dalam akar(3), fungsi perkalian(3, 3) dipanggil.
+Fungsi perkalian(3, 3) masuk ke dalam call stack.
+---------------------------------------------------
+Langkah keempat: perkalian(3, 3) dieksekusi dan menghasilkan nilai 9.
+Fungsi perkalian(3, 3) dikeluarkan dari call stack, dan akar(3) sekarang memiliki nilai 9.
+---------------------------------------------------
+Langkah kelima: Kembali ke fungsi pythagoras, sekarang fungsi akar(b) dipanggil dengan b = 4.
+Fungsi akar(4) masuk ke dalam call stack.
+---------------------------------------------------
+Langkah keenam: Di dalam akar(4), fungsi perkalian(4, 4) dipanggil.
+Fungsi perkalian(4, 4) masuk ke dalam call stack.
+---------------------------------------------------
+Langkah ketujuh: perkalian(4, 4) dieksekusi dan menghasilkan nilai 16.
+Fungsi perkalian(4, 4) dikeluarkan dari call stack, dan akar(4) sekarang memiliki nilai 16.
+---------------------------------------------------
+Langkah kedelapan: Kembali ke fungsi pythagoras, sekarang fungsi akar(c) dipanggil dengan c = 5.
+Fungsi akar(5) masuk ke dalam call stack.
+---------------------------------------------------
+Langkah kesembilan: Di dalam akar(5), fungsi perkalian(5, 5) dipanggil.
+Fungsi perkalian(5, 5) masuk ke dalam call stack.
+---------------------------------------------------
+Langkah kesepuluh: perkalian(5, 5) dieksekusi dan menghasilkan nilai 25.
+Fungsi perkalian(5, 5) dikeluarkan dari call stack, dan akar(5) sekarang memiliki nilai 25.
+---------------------------------------------------
+Langkah kesebelas: Kembali ke fungsi pythagoras, sekarang membandingkan apakah 9 + 16 === 25.
+Fungsi pythagoras mengevaluasi ekspresi ini dan menghasilkan true.
+---------------------------------------------------
+Langkah kedua belas: Fungsi pythagoras(3, 4, 5) selesai dieksekusi dan dikeluarkan dari call stack.
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
