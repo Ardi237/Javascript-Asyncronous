@@ -1,0 +1,97 @@
+A. Umum :
+1. JavaScript disebut sebagai bahasa single-threaded karena ia hanya memiliki satu thread eksekusi, yang berarti hanya bisa menjalankan satu operasi pada satu waktu. 
+-------------------------------------------------------
+2. Ini berarti, ketika JavaScript menjalankan sebuah fungsi atau operasi, ia akan menyelesaikan tugas tersebut sebelum beralih ke tugas berikutnya.
+-------------------------------------------------------
+
+
+B. Apa itu Thread :
+1. Thread adalah jalur eksekusi dalam program komputer.
+-------------------------------------------------------
+2. Sebuah program bisa memiliki satu atau lebih thread.
+-------------------------------------------------------
+3. Dalam konteks single-threaded, hanya ada satu jalur eksekusi, jadi tidak ada dua operasi yang bisa berjalan secara bersamaan dalam thread yang sama.
+-------------------------------------------------------
+
+
+
+C. Bagaimana Single-Threaded bekerja pada JavaScript
+1. Dalam JavaScript, semua kode dijalankan di dalam thread utama (main thread).
+-------------------------------------------------------
+2. Ketika Anda menjalankan kode, JavaScript memprosesnya satu per satu, baris demi baris.
+-------------------------------------------------------
+3. Ketika Anda menjalankan kode, JavaScript memprosesnya satu per satu, baris demi baris.
+-------------------------------------------------------
+
+
+
+D. Contoh kode sinkron (single-threaded) :
+<---
+console.log('Mulai');
+
+for (let i = 0; i < 1000000000; i++) {
+  // Loop besar yang memakan waktu
+}
+
+console.log('Selesai');
+//Mulai
+//Selesai
+--->
+Meskipun loop memakan waktu, JavaScript akan menyelesaikan loop itu dulu sebelum mencetak "Selesai" karena ia menjalankan kode secara sinkron, satu per satu, tanpa menunggu atau menjalankan tugas lain di tengah-tengah.
+-------------------------------------------------------
+
+
+E. Kelemahan Single-Threaded :
+1. Karena JavaScript hanya memiliki satu thread eksekusi, jika ada tugas yang berat atau lambat, seperti membaca file besar atau menunggu respons dari server, hal itu dapat membuat program tidak responsif (terkunci atau "hang") sampai tugas tersebut selesai.
+-------------------------------------------------------
+
+
+
+
+F. Bagaimana Mengatasi keterbatasan Single-Threaded :
+1. JavaScript menggunakan asynchronous programming dan event loop. 
+-------------------------------------------------------
+2. Meskipun JavaScript itu single-threaded, dia bisa menangani operasi asinkron seperti panggilan API, event UI, atau timer tanpa harus menunggu sampai operasi tersebut selesai sebelum melanjutkan ke operasi berikutnya.
+-------------------------------------------------------
+3. Event Loop :
+3a. Event loop adalah mekanisme yang memungkinkan JavaScript untuk menangani tugas asinkron. Saat fungsi asinkron dipanggil, JavaScript menempatkannya di dalam antrian (queue). 
+-------------------------------------------------------
+3b. Setelah thread utama (call stack) kosong, event loop akan memeriksa apakah ada tugas dalam antrian yang siap untuk dieksekusi, lalu menambahkannya ke call stack untuk diproses.
+-------------------------------------------------------
+Contoh Asynchronous:
+console.log('Mulai');
+
+setTimeout(() => {
+  console.log('Ini berjalan setelah 2 detik');
+}, 2000);
+
+console.log('Selesai');
+//Mulai
+Selesai
+Ini berjalan setelah 2 detik
+-------------------------------------------------------
+
+
+
+G. JavaScript dan Web Workers :
+1. Untuk tugas yang sangat berat yang benar-benar memerlukan eksekusi paralel (multi-threading), JavaScript di browser mendukung Web Workers, yang memungkinkan pembuatan thread terpisah untuk menjalankan tugas tertentu di luar thread utama.
+-------------------------------------------------------
+2. Namun, thread ini tidak dapat secara langsung memodifikasi DOM dan harus berkomunikasi dengan thread utama melalui pesan.
+-------------------------------------------------------
+
+
+H. Kesimpulan
+1. JavaScript itu single-threaded, artinya ia hanya menjalankan satu tugas dalam satu waktu di thread utama.
+-------------------------------------------------------
+2. Asynchronous programming dan event loop memungkinkan JavaScript menangani operasi yang lambat atau membutuhkan waktu tanpa memblokir thread utama.
+-------------------------------------------------------
+3. Untuk tugas yang sangat berat, JavaScript bisa menggunakan Web Workers untuk menjalankan tugas di thread terpisa
+-------------------------------------------------------
+
+
+
+
+
+
+
+
