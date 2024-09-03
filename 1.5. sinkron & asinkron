@@ -1,0 +1,167 @@
+A. Umum :
+1. Sinkron (Synchronous) dan Asinkron (Asynchronous) adalah konsep penting dalam pemrograman yang menggambarkan bagaimana tugas atau operasi dijalankan oleh program.
+--------------------------------------------------------
+
+
+
+B. Sinkron (Synchronous) :
+1. Dalam pemrograman sinkron, tugas-tugas dijalankan satu per satu secara berurutan. Artinya, setiap tugas akan dijalankan sepenuhnya sebelum tugas berikutnya dimulai.
+--------------------------------------------------------
+2. Jika satu tugas membutuhkan waktu lama untuk diselesaikan, tugas berikutnya harus menunggu sampai tugas sebelumnya selesai. 
+--------------------------------------------------------
+3. Ini berarti program dieksekusi secara linier, tanpa adanya interupsi.
+--------------------------------------------------------
+
+
+
+C. Contoh Sinkron :
+//Contoh :
+<----
+console.log('Mulai');
+
+function tugasBerat() {
+  for (let i = 0; i < 1000000000; i++) {
+    // Loop berat yang memakan waktu
+  }
+  console.log('Tugas Berat Selesai');
+}
+
+tugasBerat();
+console.log('Selesai');
+---->
+//Output
+<----
+Mulai
+Tugas Berat Selesai
+Selesai
+--------------------------------------------------------
+// Penjelasan : 
+* Pada Contoh di atas, fungsi `tugasBerat` harus selesai dieksekusi sebelum baris `console.log('Selesai')` dapat dijalankan.
+--------------------------------------------------------
+* Ini adalah contoh dari eksekusi sinkron, di mana program menunggu sampai tugas saat ini selesai sebelum melanjutkan ke tugas berikutnya.
+--------------------------------------------------------
+
+
+
+D. Kelemahan Sinkron :
+* Blocking (Terblokir): Jika ada tugas yang memakan waktu lama, seperti memuat file besar atau menunggu respon dari server, program akan terblokir dan tidak dapat menjalankan tugas 
+lainnya sampai tugas tersebut selesai.
+--------------------------------------------------------
+* Kurang efisien dalam menangani I/O atau operasi yang lambat.
+--------------------------------------------------------
+
+
+
+--------------------------------------------------------
+
+--------------------------------------------------------
+
+--------------------------------------------------------
+
+
+
+A. Asinkron (Asynchronous) :
+1. Dalam pemrograman asinkron, tugas-tugas dapat dijalankan secara bersamaan atau tidak harus menunggu satu sama lain. 
+--------------------------------------------------------
+2. Ini berarti tugas yang lambat (seperti operasi I/O atau permintaan HTTP) dapat dimulai, dan sementara itu, tugas lain dapat dijalankan tanpa menunggu tugas pertama selesai. 
+--------------------------------------------------------
+3. Ini memungkinkan program untuk tetap responsif dan efisien.
+--------------------------------------------------------
+
+
+
+B. Contoh Asinkron :
+/// Contoh :
+<----
+console.log('Mulai');
+
+setTimeout(() => {
+  console.log('Tugas Berat Selesai');
+}, 2000);
+
+console.log('Selesai');
+---->
+// Output :
+<----
+Mulai
+Selesai
+Tugas Berat Selesai
+---->
+--------------------------------------------------------
+// Penjelasan :
+1. Pada contoh di atas, fungsi setTimeout adalah contoh dari operasi asinkron. 
+--------------------------------------------------------
+2. Fungsi ini tidak akan memblokir eksekusi kode lainnya. Sebaliknya, setelah 2 detik, pesan `Tugas Berat Selesai akan dicetak` , tetapi selama menunggu 2 detik itu, program dapat melanjutkan menjalankan kode lainnya.
+--------------------------------------------------------
+
+
+
+
+C. Keuntungan  Asinkron :
+1. Non-blocking (Tidak terbloking) : Tugas-tugas yang lambat tidak akan menghalangi eksekusi tugas lain.
+--------------------------------------------------------
+2. `Lebih efisien` dalam menangani operasi I/O atau tugas yang membutuhkan waktu lama seperti panggilan API, pembacaan file, atau akses ke database.
+--------------------------------------------------------
+
+
+
+D. Contoh Penggunaan Asinkron dalam JavaScript:
+1. Callback:
+function getData(callback) {
+  setTimeout(() => {
+    callback('Data telah diambil');
+  }, 2000);
+}
+
+getData((data) => {
+  console.log(data);
+});
+--------------------------------------------------------
+2. Promises :
+2a. Promise adalah objek yang mewakili operasi yang belum selesai tetapi akan selesai di masa depan.
+<-----
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Data telah diambil');
+  }, 2000);
+});
+
+promise.then((data) => {
+  console.log(data);
+});
+---->
+--------------------------------------------------------
+3. Aysnc/Await :
+3a. Async/await adalah cara modern dan lebih intuitif untuk menangani operasi asinkron dengan sintaks yang mirip kode sinkron.
+async function fetchData() {
+  let data = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Data telah diambil');
+    }, 2000);
+  });
+  console.log(data);
+}
+
+fetchData();
+--------------------------------------------------------
+
+
+
+
+E. Kesimpulan :
+1. Sinkron (Synchronous): Tugas dijalankan satu per satu, dan program harus menunggu sampai tugas selesai sebelum melanjutkan ke tugas berikutnya. 
+1a. Cocok untuk tugas yang tidak memerlukan waktu lama.
+--------------------------------------------------------
+2. Asinkron (Asynchronous): Tugas dapat dijalankan tanpa harus menunggu tugas lainnya selesai, memungkinkan program untuk tetap berjalan dan tidak terblokir oleh tugas-tugas yang lambat. 
+2a. Cocok untuk operasi yang membutuhkan waktu, seperti I/O, komunikasi jaringan, atau pemrosesan data besar.
+--------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
