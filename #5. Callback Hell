@@ -1,0 +1,102 @@
+A. Callback Hell :
+1. Callback Hell adalah istilah yang digunakan untuk menggambarkan situasi ketika kamu memiliki banyak callback bersarang (nested callbacks) dalam kode JavaScript, yang menyebabkan kode menjadi sulit dibaca, dipahami, dan di-maintain.
+------------------------------------------------------------------
+2. Ini biasanya terjadi ketika Anda menangani banyak operasi asinkron yang perlu dijalankan secara berurutan, di mana setiap operasi bergantung pada hasil dari operasi sebelumnya.
+------------------------------------------------------------------
+
+
+
+
+B. Contoh Callback Hell :
+<----
+getData(function(data) {
+  processData(data, function(processedData) {
+    saveData(processedData, function(savedData) {
+      console.log('Data saved successfully');
+    }, function(error) {
+      console.error('Error saving data:', error);
+    });
+  }, function(error) {
+    console.error('Error processing data:', error);
+  });
+}, function(error) {
+  console.error('Error getting data:', error);
+});
+---->
+------------------------------------------------------------------
+//Penjelasan :
+* Pada contoh di atas, setiap fungsi callback bersarang di dalam callback lainnya, sehingga menciptakan piramida atau "ladder" yang dalam. 
+------------------------------------------------------------------
+* Ini disebut callback hell karena sulit diikuti logikanya dan menjadi sangat tidak rapi.
+------------------------------------------------------------------
+
+
+
+
+C. Masalah Callback Hell :
+1. Membaca kode menjadi sulit : Kode menjadi sulit dibaca karena indentasi yang terus bertambah setiap kali callback baru ditambahkan.
+------------------------------------------------------------------
+2. Sulit di-maintain : Jika ada perubahan bagian kode yang saling bergantung.
+------------------------------------------------------------------
+3. Kesalahan yang sulit dilacak : Debugging menjadi lebih sulit karena banyaknya callback yang saling bersarang.
+------------------------------------------------------------------
+
+
+
+
+D. Solusi untuk Callback Hell :
+1. Promises : Menggunakan Promise untuk menangani operasi asinkron secara lebih rapi, di mana anda bisa mengelola chaining dengan lebih baik tanpa perlu callback bersarang.
+// Contoh :
+getData()
+  .then(data => processData(data));
+  .then(processedData => saveData(processedData))
+  .then(() => console.log('Data saved successfully'))
+  .catch(error => console.error('Error:', error));
+------------------------------------------------------------------
+2. Async/Await : Menggunakan async/await, yang memperkenalkan sintaks lebih sederhana dan mirip dengan kode sinkron, meskipun tetap menangani operasi asinkron.
+// Contoh :
+async function handleData() {
+  try {
+    const data = await getData();
+    const processedData = await processData(data);
+    await saveData(processedData);
+    console.log('Data saved successfully');
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+handleData();
+------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
