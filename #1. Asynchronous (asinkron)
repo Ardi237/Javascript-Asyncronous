@@ -19,7 +19,8 @@ B. Mengapa Asynchronous penting :
 
 
 C. Contoh sederhana AsynChronous :
-1. Misalnya, dalam JavaScript, kita bisa menggunakan `setTimeout`, `promise`, atau 'async/await' untuk melakukan operasi asinkron.
+* Misalnya, dalam JavaScript, kita bisa menggunakan `setTimeout`, `promise`, atau 'async/await' untuk melakukan operasi asinkron.
+1. Menggunakan setTimeout :
 * <---
 console.log('Mulai');
 
