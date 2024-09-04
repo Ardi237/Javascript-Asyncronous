@@ -1,0 +1,146 @@
+// Contoh 
+// Callback Version
+const requestCallback = (url, success, failure) => {
+    const delay = Math.floor(Math.random() * 4500) + 500;
+    setTimeout(() => {
+        if (delay > 4000) {
+            failure('Error : Connection is Timeout'); //panggilan fungsi
+        }else {
+            success('Success : ${url} (${delay}ms)'); //panggilan fungsi
+        }
+    }, delay);
+};
+
+
+// Arguments :
+requestCallback(
+  `movie.com`, 
+  function () { //anonymous function
+    console.log('It worked!');
+  },
+  fucntion () { //anonymous function
+    console.log('Not Working')
+  }
+);
+
+
+//Arguments :
+requestCallback(
+  `movie.com`,
+  function (response) {
+    console.log('success', response);
+  },
+  function (error) {
+    console.log('error', error);
+)
+
+// Penjelasan :
+
+pertanyaan :
+1. Bentuk dari  function () { 
+    console.log('It worked!');
+  }, :
+1a. Function .... : //anonymous function (fungsi tanpa nama) atau callback function. Fungsi ini didefinisikan sebagai argumen 
+------------------------------------------------------------
+2. Apakah berarti failure('Error : Connection is Timeout'); dan  success(Success : ${url} (${delay}ms)); merupakan parameter default dari requestCallback??
+2a. Mereka adalah **panggilan fungsi** yang memanfaatkan fungsi callback yang diberikan sebagai parameter saat requestCallback` dipanggil.
+------------------------------------------------------------
+3. lalu bagaimana contoh panggilan fungsi dengan callback diluar function :
+3a. function successCallback(response) {
+    console.log("Success:", response);
+}
+
+function failureCallback(error) {
+    console.log("Failure:", error);
+}
+
+requestCallback('movie.com', successCallback, failureCallback);
+------------------------------------------------------------
+4. Jadi parameter  (url, success, failure) dihitung sebagai fungsi?
+4a. Parameter (url, success, failure) dalam fungsi requestCallback tidak dihitung sebagai fungsi itu sendiri, tetapi merupakan `parameter` yang disediakan untuk fungsi tersebut.
+------------------------------------------------------------
+5. Jelaskan perbedaan kedua argument tersebut :
+5a. perbedaan : 
+requestCallback(
+  `movie.com`, 
+  function () {
+    console.log('It worked!');
+  },
+  function () {
+    console.log('Not Working');
+  }
+);
+//  * Tidak menerima argumen
+    * Hanya mengeksekusi console.log('It worked!') & console.log('Not Working');       
+      ketika request berhasil.
+    * Ini berarti outputnya akan selalu "It worked!" &  "Not Working"  tanpa informasi       lebih lanjut mengenai response.
+5b. perbedaan : requestCallback(
+  `movie.com`,
+  function (response) {
+    console.log('success', response);
+  },
+  function (error) {
+    console.log('error', error);
+  }
+);
+------------------------------------------------------------
+//  * Menerima satu argumen, yaitu `response` & `error`.
+    * Menampilkan pesan sukses dan isi dari `response` menggunakan 
+      `console.log('success', response);`
+    * Menampilkan pesan error dan isi dari  `error` menggunakan `console.log('error', 
+      error);`
+    * Ini juga memberikan lebih banyak detail tentang apa yang menyebabkan kegagalan 
+      (misalnya, pesan error spesifik seperti `Error: Connection Timeout `).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
