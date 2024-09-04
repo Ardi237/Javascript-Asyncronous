@@ -1,0 +1,123 @@
+A. Contoh :
+1. Soal : Bayangkan kamu ingin membuat kopi, kemudian makan roti, dan akhirnya minum jus. Kamu ingin melakukan ini secara berurutan : Pertama buat kopi, lalu makan roti, dan terakhir minum jus. Setiap langkah dilakukan setelah langkah sebelumnya selesai.
+---------------------------------------------------------------------
+2. Contoh :
+// Fungsi untuk membuat kopi (butuh waktu 1 detik)
+const makeCoffee = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Kopi selesai dibuat");
+    }, 1000); // 1 detik
+  });
+};
+
+// Fungsi untuk makan roti (butuh waktu 2 detik)
+const eatBread = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Roti sudah dimakan");
+    }, 2000); // 2 detik
+  });
+};
+
+// Fungsi untuk minum jus (butuh waktu 1,5 detik)
+const drinkJuice = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Jus selesai diminum");
+    }, 1500); // 1,5 detik
+  });
+};
+
+// Menggunakan chaining untuk menjalankan operasi secara berurutan
+makeCoffee()
+  .then((result) => {
+    console.log(result); // Output: "Kopi selesai dibuat"
+    return eatBread(); // Pindah ke tahap berikutnya: makan roti
+  })
+  .then((result) => {
+    console.log(result); // Output: "Roti sudah dimakan"
+    return drinkJuice(); // Pindah ke tahap terakhir: minum jus
+  })
+  .then((result) => {
+    console.log(result); // Output: "Jus selesai diminum"
+    console.log("Semua aktivitas selesai!");
+  })
+  .catch((error) => {
+    console.log("Ada masalah:", error);
+  });
+---------------------------------------------------------------------
+// Penjelasan :
+1. Fungsi `makeCoffee()`, `eatBread()`, `dan drinkJuice()`:
+* Masing-masing fungsi ini mengembalikan Promise yang menyimulasikan aktivitas 
+  sehari-hari dengan setTimeout untuk menunjukkan waktu yang dibutuhkan untuk 
+  menyelesaikan tugas tersebut.
+---------------------------------------------------------------------
+2. Chaining dengan .then():
+* makeCoffee() dipanggil pertama kali. Ketika kopi selesai dibuat (Promise resolve), hasilnya dikirim ke .then() pertama.
+---------------------------------------------------------------------
+* Di dalam .then() pertama, setelah kopi selesai dibuat, kita mencetak pesan ("Kopi selesai dibuat"), lalu memulai operasi berikutnya, yaitu eatBread() untuk makan roti.
+---------------------------------------------------------------------
+* Setelah roti dimakan, hasilnya dikirim ke .then() kedua, di mana kita mencetak pesan ("Roti sudah dimakan"), lalu melanjutkan dengan drinkJuice() untuk minum jus.
+---------------------------------------------------------------------
+* Akhirnya, setelah jus selesai diminum, hasilnya dikirim ke .then() ketiga, di mana kita mencetak pesan terakhir ("Jus selesai diminum").
+---------------------------------------------------------------------
+3. Handling Error dengan `.catch()` :
+* Jika ada masalah pada salah satu operasi, misalnya jika salah satu Promise gagal (mungkin karena waktu yang terlalu lama atau ada kesalahan lainnya), .catch() akan menangkap error tersebut dan mencetak pesan error.
+---------------------------------------------------------------------
+4. Jika semua operasi berjalan lancar, output di konsol akan terlihat seperti ini:
+Kopi selesai dibuat
+Roti sudah dimakan
+Jus selesai diminum
+Semua aktivitas selesai!
+---------------------------------------------------------------------
+Jika ada kesalahan dalam salah satu operasi (misalnya Promise reject), pesan error akan ditangani oleh .catch().
+---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
