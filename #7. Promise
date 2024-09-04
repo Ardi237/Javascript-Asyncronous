@@ -1,0 +1,160 @@
+A. Umum : 
+1. Promise dalam JavaScript adalah sebuah objek yang mewakili hasil dari operasi asinkron yang mungkin belum selesai, tetapi diharapkan selesai di masa depan.
+---------------------------------------------------
+2. Promise memberikan cara yang lebih baik untuk menangani operasi asinkron dibandingkan dengan callback tradisional, karena Promise membuat kode lebih mudah dibaca dan diikuti.
+---------------------------------------------------
+
+
+
+
+B. Konsep dasar promise :
+1. Pending (Sedang Berjalan) :
+   Ketika Promise pertama kali dibuat, ia berada dalam status pending (tertunda),     yang berarti operasi asinkron tersebut belum selesai dan hasilnya belum     
+   diketahui.
+---------------------------------------------------
+2. Fullfilled (Berhasil) :
+   Jika operasi asinkron berhasil, promise akan berpindah ke status fulfilled   
+   (terpenuhi) dan menghasilkan suatu nilai (hasil).
+---------------------------------------------------
+3. Rejected (Gagal) :
+   Jika operasi asinkron gagal, Promise akan berpindah ke status rejected 
+   (ditolak), dan menghasilkan suatu alasan atau error.
+---------------------------------------------------
+
+
+
+
+C. Cara membuat promise :
+1. Untuk membuat Promise, kita menggunakan konstruktor Promise dengan fungsi yang memiliki dua parameter: resolve (untuk menandakan keberhasilan) dan reject (untuk menandakan kegagalan).
+---------------------------------------------------
+2. Contoh
+const myPromise = new Promise((resolve, reject) => {
+  // Operasi asinkron, misalnya pengambilan data dari server
+  const success = true; // Misalnya, operasi berhasil
+  if (success) {
+    resolve("Data berhasil diambil"); // Jika sukses
+  } else {
+    reject("Gagal mengambil data"); // Jika gagal
+  }
+});
+---------------------------------------------------
+
+
+
+
+D. Cara Menggunakan Promise :
+1. Setelah membuat Promise, kita bisa "menangkap" hasilnya menggunakan metode .then() dan .catch():
+1a. `.then()` digunakan untuk menangani hasil ketika Promise berhasil (fulfilled).
+1b. `.catch()` digunakan untuk menangani error ketika Promise gagal (rejected).
+---------------------------------------------------
+2. Contoh :
+myPromise
+  .then((result) => {
+    console.log(result); // Output: "Data berhasil diambil"
+  })
+  .catch((error) => {
+    console.log(error); // Jika gagal: "Gagal mengambil data"
+  });
+---------------------------------------------------
+
+
+
+
+E. Contoh Sederhana :
+1. Contoh Sederhana:
+1a. Bayangkan kamu sedang menunggu teman mengirim pesan. Ini adalah contoh yang relevan untuk memahami Promise:
+* Pending: kamu menunggu teman kamu mengirim pesan (Promise sedang berjalan).
+---------------------------------------------------
+* Fulfilled: Teman kamu mengirim pesan yang mengatakan "Saya dalam perjalanan!"   
+  (Promise terpenuhi).
+---------------------------------------------------
+* Rejected: Teman kamu tidak bisa datang dan memberi tahu kamu "Maaf, saya tidak    bisa datang." (Promise ditolak).
+---------------------------------------------------
+2. Contoh :
+const waitMessage = new Promise((resolve, reject) => {
+    const friendComing = true; // Ubah menjadi false untuk menolak.
+    if (friendComing) {
+        resolve("Saya dalam perjalanan!"); // Teman datang
+    }else {
+        reject("Maaf, saya tidak bisa datang."); // Teman tidak bisa datang
+    }
+});
+
+waitMessage
+  .then((message) => {
+    console.log(message); // Output: "Saya dalam perjalanan!"
+  })
+  .catch((error) => {
+    console.log(error); // Output: "Maaf, saya tidak bisa datang."
+  });
+---------------------------------------------------
+
+
+
+
+F. Keuntungan menggunakan promise :
+1. Lebih Mudah Dibaca: Kode dengan Promise lebih mudah diikuti daripada callback yang bersarang (callback hell).
+---------------------------------------------------
+2. Chaining (Rantai): Anda bisa merangkai beberapa .then() untuk menjalankan beberapa operasi secara berurutan.
+---------------------------------------------------
+3. Error Handling yang Konsisten: Anda bisa menangkap error dari seluruh rangkaian operasi asinkron dengan .catch() di akhir rantai Promise.
+---------------------------------------------------
+
+
+
+G. Contoh Promise dengan Chaining :
+requestPromise('movie.com')
+  .then((result) => {
+    console.log('Page 1:', result);
+    return requestPromise('movie.com/page2');
+  })
+  .then((result) => {
+    console.log('Page 2:', result);
+    return requestPromise('movie.com/page3');
+  })
+  .then((result) => {
+    console.log('Page 3:', result);
+  })
+  .catch((error) => {
+    console.log('Error:', error);
+  });
+// Dalam contoh ini, setiap operasi bergantung pada yang sebelumnya, dan jika ada kesalahan di mana saja, itu akan ditangkap oleh .catch().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
