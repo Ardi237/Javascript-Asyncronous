@@ -1,0 +1,134 @@
+A. Umum : 
+1. Callback hell terjadi ketika kamu memiliki banyak callback bersarang (nested) yang membuat kode menjadi sulit dibaca dan di-maintain. 
+-------------------------------------------------------------------------
+2. Misalnya, jika kamu memiliki banyak operasi asinkron yang harus dijalankan satu per satu, menggunakan callback yang bersarang bisa membuat kode terlihat rumit dan sulit dipahami.
+-------------------------------------------------------------------------
+
+
+
+
+B. Contoh Callback Hell :
+1. Misalkan kamu ingin melakukan tiga permintaan asinkron secara berurutan menggunakan callback:
+// Contoh :
+requestCallback('url1.com', 
+  function(response1) {
+    console.log('Response 1:', response1);
+    requestCallback('url2.com', 
+      function(response2) {
+        console.log('Response 2:', response2);
+        requestCallback('url3.com', 
+          function(response3) {
+            console.log('Response 3:', response3);
+            // Lanjutkan operasi...
+          }, 
+          function(error) {
+            console.log('Error in request 3:', error);
+          });
+      }, 
+      function(error) {
+        console.log('Error in request 2:', error);
+      });
+  }, 
+  function(error) {
+    console.log('Error in request 1:', error);
+  });
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+// Kode di atas adalah contoh dari callback hell, di mana callback bersarang membuat kode menjadi tidak rapi dan sulit diikuti. Inilah masalah yang diatasi oleh Promise.
+-------------------------------------------------------------------------
+
+
+
+
+
+C. Mengatasi Callback Hell dengan promise :
+1. Dengan Promise, kamu bisa menulis kode yang lebih bersih dan lebih mudah dibaca, karena Promise memungkinkan chaining (.then()) untuk menjalankan operasi secara berurutan tanpa harus bersarang. 
+-------------------------------------------------------------------------
+2. Ini akan membuat kode lebih modular dan lebih mudah di-debug.
+-------------------------------------------------------------------------
+
+
+
+
+
+D. Contoh Penggunaan Promise untuk Mengatasi Callback Hell:
+// Contoh 
+// Fungsi simulasi request menggunakan Promise
+const requestPromise = (url) => {
+  return new Promise((resolve, reject) => {
+    const delay = Math.floor(Math.random() * 4500) + 500;
+    setTimeout(() => {
+      if (delay > 2000) {
+        reject('Error: Connection Timeout');
+      } else {
+        resolve(`Success: ${url} (${delay}ms)`);
+      }
+    }, delay);
+  });
+};
+
+// Menggunakan Promise chaining untuk menghindari callback hell
+requestPromise('url1.com')
+  .then((response1) => {
+    console.log('Response 1:', response1);
+    return requestPromise('url2.com'); // Pindah ke request berikutnya
+  })
+  .then((response2) => {
+    console.log('Response 2:', response2);
+    return requestPromise('url3.com'); // Pindah ke request terakhir
+  })
+  .then((response3) => {
+    console.log('Response 3:', response3);
+    // Lanjutkan operasi jika diperlukan...
+  })
+  .catch((error) => {
+    console.error('Error:', error); // Menangani error jika ada yang gagal
+  });
+-------------------------------------------------------------------------
+// Penjelasan : 
+1. Menghindari Callback Bersarang :
+* Dengan Promise, setiap operasi asinkron ditangani secara berurutan menggunakan .then(), sehingga tidak ada lagi callback bersarang. 
+* Ini membuat alur logika lebih linear dan mudah diikuti.
+-------------------------------------------------------------------------
+2. Chaining dengan `.then()` :
+* Setelah requestPromise('url1.com') selesai, Promise akan resolve, dan hasilnya diteruskan ke .then() berikutnya.
+* Di setiap .then(), kamu dapat melakukan operasi berikutnya, seperti memanggil requestPromise lagi dengan URL yang berbeda. Setiap operasi terjadi satu per satu, tetapi tanpa callback yang bersarang.
+-------------------------------------------------------------------------
+3. Menangani Error dengan `.catch()`;
+* Jika salah satu dari Promise ditolak (reject), .catch() akan menangani error tersebut.
+* Kamu hanya perlu satu .catch() di akhir untuk menangani semua kemungkinan error, daripada harus menulis penanganan error di setiap level callback.
+-------------------------------------------------------------------------
+
+
+
+E. Kesimpulan:
+1. Promise membantu mengatasi callback hell dengan menyediakan mekanisme chaining menggunakan .then() dan .catch().
+-------------------------------------------------------------------------
+2. Ini memungkinkan kamu untuk menulis kode yang lebih bersih, lebih mudah dipahami, dan lebih mudah di-maintain. 
+-------------------------------------------------------------------------
+3. Jika ada banyak operasi asinkron yang harus dilakukan secara berurutan, menggunakan Promise akan membuat kode jauh lebih rapi dibandingkan dengan menggunakan callback bersarang.
+-------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
