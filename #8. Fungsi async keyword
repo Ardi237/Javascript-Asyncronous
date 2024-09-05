@@ -1,0 +1,127 @@
+A. Umum :
+1. Async adalah kata kunci dalam JavaScript yang digunakan untuk mendefinisikan fungsi asinkron.
+-----------------------------------------------------------------
+2. Fungsi asinkron adalah fungsi yang memungkinkan penulisan kode non-blocking dengan cara yang lebih mudah dipahami dan lebih rapi dibandingkan dengan penggunaan Promise chaining biasa.
+-----------------------------------------------------------------
+
+
+
+
+B. Penjelasan Fungsi `async` :
+** Pengembalian nilai :
+1. Deklarasi fungsi Asinkron : Saat sebuah fungsi dideklarasikan dengan async, fungsi tersebut akan selalu mengembalikan promise, meskipun nilai yang dikembalikan bukanlah sebuah promise. 
+-----------------------------------------------------------------
+2. Jika fungsi mengembalikkan nilai biasa, nilai tersebut secara otomatis akan dikemas dalam Promise.resolve().
+-----------------------------------------------------------------
+3. Contoh :
+<-----
+async function example() {
+  return 'Hello, World!';
+}
+
+example().then(console.log); // Output: Hello, World!
+/* atau */
+async function example() {
+  return "Hello";
+}
+
+example().then(value => console.log(value)); // Output: Hello
+
+----->
+-----------------------------------------------------------------
+//Dalam contoh di atas, meskipun fungsi example hanya mengembalikan string `hello`, hasilnya adalah sebuah Promise yang diselesaikan (resolved) dengan nilai "Hello".
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+** Penerapan dalam fungsi :
+1. `async` digunakan sebelum deklarasi fungsi untuk menunjukkan bahwa fungsi tersebut akan bekerja secara asinkron.
+-----------------------------------------------------------------
+2. Karena fungsi asinkron selalu mengembalikan `promise`, ini berarti bahwa kamu dapat menggunakan metode seperti .then() atau await untuk menangani nilai yang dikembalikan oleh fungsi tersebut.
+-----------------------------------------------------------------
+3. Contoh :
+<----
+async function fetchData() {
+  return "Data fetched";
+}
+
+const data = fetchData(); // `data` adalah Promise
+data.then(result => console.log(result)); // Output: Data fetched
+----->
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+** Menggabungkan dengan await :
+1. async sering digunakan bersama dengan await. await memungkinkan kamu untuk menunggu penyelesaian (resolve) dari sebuah promise di dalam fungsi async, tanpa harus menggunakan `.then()` 
+-----------------------------------------------------------------
+2. Tanpa `await`, kode di dalam fungsi `async` akan terus berjalan tanpa menunggu hasil dari operasi asinkron.
+-----------------------------------------------------------------
+3. Contoh :
+<----
+async function fetchData() {
+  let response = await someAsyncOperation();
+  console.log(response);
+}
+---->
+-----------------------------------------------------------------
+// Pada contoh ii, someAsyncOperation adalah sebiah opera asinkron (misalnya, pengambilan data dari API), `await` memastikan bahwa response tidak akan menerima nilai sampai operasi tersebut selesai.
+-----------------------------------------------------------------
+
+
+
+C. Kapan menggunakan `async` :
+1. Gunakan async ketika kamu ingin sebuah fungsi bekerja dengan operasi asinkron dan mengembalikan Promise secara default.
+-----------------------------------------------------------------
+2. async sangat berguna dalam situasi di mana kamu harus menunggu hasil dari operasi seperti fetching data, pembacaan file, atau operasi jaringan lainnya sebelum melanjutkan eksekusi kode.
+-----------------------------------------------------------------
+
+
+
+
+D. Kesimpulan :
+1. `async` adalah kata kunci yang digunakan untuk mendeklarasikan fungsi asinkron, yang secara otomatis mengembalikan promise.
+-----------------------------------------------------------------
+2. `async` membuat penanganan kode asinkron lebih mudah dan terorganisir, terutama ketika dikombinasikan dengan await.
+-----------------------------------------------------------------
+3. Penggunaan async memberikan fleksibilitas dalam menangani operasi asinkron tanpa memerlukan chaining Promise secara manual atau callback
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
