@@ -1,0 +1,117 @@
+A. Umum :
+1. await adalah kata kunci yang digunakan di dalam fungsi yang dideklarasikan dengan async.
+-----------------------------------------------------
+2. Fungsi await memungkinkan kode untuk "menunggu" penyelesaian (resolve) dari sebuah Promise sebelum melanjutkan eksekusi baris kode berikutnya.
+-----------------------------------------------------
+
+
+
+
+B. Detail mengenai await : 
+1. Sintaks dan penggunaan :
+* await hanya bisa digunakan di dalam fungsi yang dideklarasikan dengan async. Jika digunakan di luar fungsi async, maka akan menghasilkan error.
+-----------------------------------------------------
+* Ketika await digunakan di depan sebuah promise. eksekusi fungsi akan berhenti di baris itu hingga Promise tersebut selesai (resolved atau rejected).
+-----------------------------------------------------
+1a. Contoh :
+<----
+async function fetchData() {
+  const response = await fetch(`https://api.example.com/data`);
+  const data = await response.json();
+  console.log(data);
+}
+---->
+// Penjelasan :
+* await fetch('https://api.example.com/data') membuat fungsi fetchData berhenti dan menunggu hingga fetch selesai (entah berhasil atau gagal).
+* Setelah fetch selesai, hasilnya disimpan di variabel response.
+* await response.json() digunakan untuk menunggu hasil parsing dari response menjadi objek JSON.
+-----------------------------------------------------
+-----------------------------------------------------
+2. Menunggu penyelesaian promise :
+* await membuat JavaScript `menunggu` penyelesaian dari Promise, namun tidak menghentikan seluruh program. Ini artinya, operasi lain di luar fungsi async tetap berjalan.
+* operasi lain di luar fungsi async tetap berjalan.
+* Jika Promise ditolak (rejected), await akan menghasilkan error yang bisa ditangani menggunakan try...catch.
+-----------------------------------------------------
+2a. Contoh :
+<----
+async function getData() {
+  try {
+    const result = await someAsyncFunction();
+    console.log(result); // Output: hasil dari someAsyncFunction
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+---->
+// Dalam contoh ini, await akan menangkap hasil dari someAsyncFunction. Jika terjadi error, block catch akan menangani error tersebut.
+-----------------------------------------------------
+-----------------------------------------------------
+3. Keunggulan await dibanding .then():
+* await membuat kode asinkron lebih mudah dibaca dan ditulis, terutama ketika ada banyak operasi asinkron yang perlu ditangani secara berurutan.
+* await menghilangkan kebutuhan untuk chaining .then() yang panjang, yang sering kali sulit dikelola.
+-----------------------------------------------------
+-----------------------------------------------------
+4. Contoh perbandingan :
+<----
+// Menggunakan .then()
+someAsyncFunction()
+  .then(result => {
+    console.log(result);
+    return anotherAsyncFunction();
+  })
+  .then(anotherResult => {
+    console.log(anotherResult);
+  })
+  .catch(error => console.error(error));
+
+// Menggunakan async/await
+async function getData() {
+  try {
+    const result = await someAsyncFunction();
+    console.log(result);
+    const anotherResult = await anotherAsyncFunction();
+    console.log(anotherResult);
+  } catch (error) {
+    console.error(error);
+  }
+}
+---->
+//Menggunakan await menghasilkan kode yang lebih mudah dipahami dan lebih mirip dengan kode sinkron.
+-----------------------------------------------------
+
+
+
+C. Kesimpulan :
+* await digunakan untuk menunggu penyelesaian Promise di dalam fungsi async, tanpa menghentikan seluruh program.
+* await membantu menangani kode asinkron dengan lebih mudah, memberikan pendekatan yang lebih intuitif dan terstruktur daripada penggunaan chaining .then().
+* Dengan await, kamu dapat menangani error dengan mudah menggunakan try...catch, membuat penulisan kode asinkron menjadi lebih bersih dan mudah dipelihara.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
